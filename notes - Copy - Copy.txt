@@ -1,0 +1,161 @@
+==============================================================================day 1==============================================================================================
+why we use star schema?
+--OLTP VS OLAP 
+OLAP -- concurancy is low in it
+OLTP -- high concurancy 
+
+Snowflex Scheam -- is shape like snow flex 
+star Scheema -- is hape like star shape
+
+in OLTP we normilze basis on numeric and categorical both in difrent table.
+
+
+power bi
+---
+
+##--------------------what is your data?
+
+1) cloud - data is stores on cloud storage it uses Microsoft asure cloud.
+2) on-premise - saving the data on local premises on data bases.
+                it stores data on Micrsoft asure data base.
+
+##--------------------how do you connect?
+
+import data
+direct Query
+ 
+1) import data -1) geting data from data lake to power bi. in this we import all data in power bi 
+                 it uses in-memory to import data -- all data is geting loaded in RAM. 
+   problems -- 1) data retrival is slow, 
+		   2) you can not have data with one GB or more if we want to handal we have to move to tablue 
+		   3) it slow becous of latency and it depends on ether net spead 
+2) direct query - it is directly connecting to sql server it will be slow becous we have to connect to it every time 
+                  RAM will be free we can do diffrent task at same time this we can not do with import data.
+
+##--------How to refresh data?
+
+1) personal gateway ---> you are giveing the acces to data base to another person. it only for direct query. we are giving the acces of our sql server
+	                becous the person has no acces to the sql server then we give gateway.
+2) on-premises getway --> 
+ 
+
+##-------Data on premises 
+
+##-------component of power bi
+
+1) power bi deckstop - downloding exe and using it
+2) power bi servises - using it online on web 
+3) power bi mobile   - power bi app on mobile
+
+1) power bi deckstop - it is free open source ( diffrence is pbi and tablue - power bi is free, it dose not suport more then 1 gb data set, it dose not support real time conections)
+
+diffrence in deckstop and power bi servises
+
+data discovery - is same as EDA in ML 
+360 viwe - we can connect all the data from  diffrent dep and we can get 360 viwe of tha data from all dep prespective.
+ 
+we can get insides from any devise
+we can do NLP on power bi
+we can connet to any microsoft products
+
+power bi servises---
+report has all the information then user select imp info and those are called visualization.
+
+commbinasion of pages is reaport.
+
+we create -- columns in data view we can see the data
+
+model view -- it is use to join the tables.
+           -- every time you do not need to join the table.
+
+
+Q) what are the diff types of filter in power bi 
+report level
+page level
+tile level
+
+
+
+to change the data befor importing 
+1) insted of loading click on transform data.
+2) we will get power query editor it help us to clean the table.
+3) first remove top 3 rows
+4) then remove last column
+5) remove subtotal
+6) select first column and last column to pevet the column - go in transfor and unpevet columns
+
+When we cahnge the exle file we can get that canges in bi by just cleking refresh.
+
+when we wan to split one colun into two column into diffrent columns
+
+remember the data types in bi.
+
+
+
+
+## decs -------
+
+row level contex and 
+
+calculated columns and measures 
+
+salesmeasure= sales[sales amount]+sales[taxamt]
+
+
+salesmeasure1=Sum(sales[sales amount],sales[taxamt])
+
+
+
+sorting the columns ---
+
+click on the column which we want to sort then click on sort by column
+and select the column which columns sort we want to applay to the that column
+
+-- create a measure 
+-- new measure --> sum(sales[saleamount])-sum(sales[taxamount])
+
+we can create measures on the tables which are not posible to join but to add the column of that calculation to the table becous we can not join these table.
+
+
+--> to split the on ecolumn into the two columns
+
+newcolumnname= Mid(table[column],Find("-",table[column],1,1)+1,Len(table[column]))
+
+
+
+==== tablue =====
+
+in tablue sheat is like a tile in pbi 
+and collection of tiles is a dashbord and in bi we have page as dashboard.
+
+dinamic demension on table/column in pbi-->
+
+selector -- new column 
+ 
+switch(first nonblank value(select[indicator],firstnonblankvalue(select[indicator],1))"positive",Relat)
+
+
+for publish --
+
+HOw to cheange only perticuler tile 
+data interaction --
+
+we can deside which tile will iteract with which tile
+
+select tile -- format -- edit interactions
+
+drildown filter -->
+ if we have one filter and on that right click on one filter that will take us to next filter 
+
+we can use coston visuals --> colour chart 
+
+--> to change whole number into time
+
+Column =
+IF (
+    LEN ( Table2[TR_TIME] ) = 4,
+    LEFT ( Table2[TR_TIME], 2 ) & ":"
+        & RIGHT ( Table2[TR_TIME], 2 ),
+    LEFT ( Table2[TR_TIME], 1 ) & ":"
+        & RIGHT ( Table2[TR_TIME], 2 )
+)
